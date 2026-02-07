@@ -2,6 +2,8 @@ package com.fun.BackendStuff.service;
 
 import com.fun.BackendStuff.DTOs.CategoryDTO;
 import com.fun.BackendStuff.entity.Category;
+import com.fun.BackendStuff.exception.CategoryIdNotFoundException;
+import com.fun.BackendStuff.exception.CategoryNameExistsException;
 import com.fun.BackendStuff.repository.CategoryRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,17 +42,17 @@ public class CategoryService {
 
     public CategoryDTO getCategoryById(Long cId)
     {
-        Category category = categoryRepository.findById(cId).orElseThrow(()->new RuntimeException("category with "+cId+" not found!"));
+        Category category = categoryRepository.findById(cId).orElseThrow(()->new CategoryIdNotFoundException("category with "+cId+" not found!"));
         return mapper.map(category,CategoryDTO.class);
     }
 
     public CategoryDTO updateCategory(Long cId,CategoryDTO categoryDTO)
     {
-        Category category = categoryRepository.findById(cId).orElseThrow(()-> new RuntimeException("category with "+cId+" not found!"));
+        Category category = categoryRepository.findById(cId).orElseThrow(()-> new CategoryIdNotFoundException("category with "+cId+" not found!"));
 
         if(category.getCategoryName().equals(categoryDTO.getCategoryName()))
         {
-            throw new RuntimeException("category name already exists!");
+            throw new CategoryNameExistsException("category name already exists!");
         }
         category.setCategoryName(categoryDTO.getCategoryName());
         Category savedCategory = categoryRepository.save(category);
@@ -58,7 +60,7 @@ public class CategoryService {
     }
     public String deleteCategory(Long cId)
     {
-        Category category = categoryRepository.findById(cId).orElseThrow(()-> new RuntimeException("category with "+cId+" not found!"));
+        Category category = categoryRepository.findById(cId).orElseThrow(()-> new CategoryIdNotFoundException("category with "+cId+" not found!"));
         categoryRepository.deleteById(category.getCategoryId());
         return "category deleted!";
     }

@@ -25,13 +25,13 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(productDTO));
     }
 
-    @GetMapping("/getallproducts")
+    @GetMapping("/getallproducts/{categoryId}")
     public ResponseEntity<List<ProductDTO>>getAllProductsByCategory(@PathVariable long categoryId)
     {
         return ResponseEntity.status(HttpStatus.OK).body(productService.getAllProductByCategoryId(categoryId));
     }
 
-    @GetMapping("/getproduct")
+    @GetMapping("/getproduct/{productId}")
     public ResponseEntity<ProductDTO>getProductById(@PathVariable long productId)
     {
         return ResponseEntity.status(HttpStatus.OK).body(productService.getProductById(productId));

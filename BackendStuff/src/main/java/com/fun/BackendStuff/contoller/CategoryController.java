@@ -36,7 +36,7 @@ public class CategoryController {
     }
 
     @PostMapping("/updateCategory")
-    public ResponseEntity<CategoryDTO>updateCategory(Long cId,CategoryDTO categoryDTO)
+    public ResponseEntity<CategoryDTO>updateCategory(@RequestParam Long cId,@RequestBody CategoryDTO categoryDTO)
     {
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(categoryService.updateCategory(cId,categoryDTO));
     }
@@ -46,8 +46,6 @@ public class CategoryController {
     {
         return ResponseEntity.status(HttpStatus.OK).body(categoryService.deleteCategory(cId));
     }
-
-
     @GetMapping("/greet")
     public String greet()
     {

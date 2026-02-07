@@ -48,5 +48,10 @@ public class CategoryController {
     }
 
 
+    @GetMapping("/greet")
+    public String greet()
+    {
+        return "hi there!";
+    }
 
 }

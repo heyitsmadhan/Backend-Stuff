@@ -19,10 +19,10 @@ public class GlobalExceptionHandler {
     public ResponseEntity<APIError>methodArgumentNotValid(MethodArgumentNotValidException ex, HttpServletRequest request)
     {
         APIError apiError = new APIError();
-        apiError.setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR.value());
+        apiError.setStatusCode(HttpStatus.BAD_REQUEST.value());
         apiError.setErrorMSG(ex.getMessage());
         apiError.setRequestURI(request.getRequestURI());
-        return ResponseEntity.status(HttpStatus.BAD_GATEWAY).body(apiError);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiError);
     }
 
     @ExceptionHandler(CategoryIdNotFoundException.class)

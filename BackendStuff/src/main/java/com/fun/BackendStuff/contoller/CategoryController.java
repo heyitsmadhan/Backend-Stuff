@@ -26,30 +26,30 @@ public class CategoryController {
     @GetMapping("/get")
     public ResponseEntity<CategoryDTO>getById(@RequestParam Long cId)
     {
-        return ResponseEntity.status(HttpStatus.FOUND).body(categoryService.getCategoryById(cId));
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.getCategoryById(cId));
     }
 
-    @GetMapping("/allCategories")
+    @GetMapping("/allcategories")
     public ResponseEntity<List<CategoryDTO>> getAll()
     {
-        return ResponseEntity.status(HttpStatus.FOUND).body(categoryService.getAllCategories());
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.getAllCategories());
     }
 
-    @PostMapping("/updateCategory")
+    @PutMapping("/updatecategory")
     public ResponseEntity<CategoryDTO>updateCategory(@RequestParam Long cId,@RequestBody CategoryDTO categoryDTO)
     {
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(categoryService.updateCategory(cId,categoryDTO));
+        return ResponseEntity.status(HttpStatus.OK).body(categoryService.updateCategory(cId,categoryDTO));
     }
 
-    @DeleteMapping("/deleteCategory/{id}")
+    @DeleteMapping("/deletecategory/{cId}")
     public ResponseEntity<String> deleteCategory(@PathVariable Long cId)
     {
-        return ResponseEntity.status(HttpStatus.OK).body(categoryService.deleteCategory(cId));
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(categoryService.deleteCategory(cId));
     }
-    @GetMapping("/greet")
+    @GetMapping("/controllercheck")
     public String greet()
     {
-        return "hi there!";
+        return "controller end point is working!";
     }
 
 }

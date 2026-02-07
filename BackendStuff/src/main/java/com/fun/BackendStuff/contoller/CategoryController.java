@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/controller")
+@RequestMapping("/category")
 public class CategoryController {
 
     @Autowired
@@ -46,7 +46,7 @@ public class CategoryController {
     {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).body(categoryService.deleteCategory(cId));
     }
-    @GetMapping("/controllercheck")
+    @GetMapping("/categorycheck")
     public String greet()
     {
         return "controller end point is working!";

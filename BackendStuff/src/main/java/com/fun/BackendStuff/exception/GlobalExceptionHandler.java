@@ -54,4 +54,24 @@ public class GlobalExceptionHandler {
         apiError.setRequestURI(request.getRequestURI());
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiError);
     }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<APIError>productNotFoundException(ProductNotFoundException ex,HttpServletRequest request)
+    {
+        APIError apiError = new APIError();
+        apiError.setStatusCode(HttpStatus.NOT_FOUND.value());
+        apiError.setErrorMSG(ex.getMessage());
+        apiError.setRequestURI(request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiError);
+    }
+
+    @ExceptionHandler(ProductAlreadyExistsException.class)
+    public ResponseEntity<APIError>productAlreadyExistsException(ProductAlreadyExistsException ex,HttpServletRequest request)
+    {
+        APIError apiError = new APIError();
+        apiError.setStatusCode(HttpStatus.CONFLICT.value());
+        apiError.setErrorMSG(ex.getMessage());
+        apiError.setRequestURI(request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(apiError);
+    }
 }
